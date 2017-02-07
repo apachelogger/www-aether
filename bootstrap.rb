@@ -43,9 +43,6 @@ Dir.chdir('/var/www/media/includes') do
   File.write('db_auth.inc', data)
 end
 
-# Runs through shell for convenient redirecting.
-system('mysql < /tmp/init.sql') || raise
-
 FileUtils.mkdir('/var/run/mysqld')
 FileUtils.chown('mysql', 'mysql', '/var/run/mysqld')
 
