@@ -7,7 +7,8 @@ ADD bootstrap.rb /usr/local/bin/bootstrap.rb
 ADD deploy-aether.rb /usr/local/bin/deploy-aether.rb
 ADD god /god
 ADD vhost.conf /tmp/vhost.conf
+ADD init.sql /tmp/init.sql
 
 RUN bootstrap.sh
 
-CMD god -c /god
+CMD god -c /god -D

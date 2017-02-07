@@ -39,10 +39,11 @@ end
 
 Dir.chdir('/var/www/media/includes') do
   data = File.read('db_auth.inc.default')
-  data.gsub!('"user"', '"root"')
-  data.gsub!('"pass"', '""')
+  data.gsub!('"database"', '"data"')
   File.write('db_auth.inc', data)
 end
+
+system('mysql < /tmp/init.sql') # Runs through shell for convenient redirecting.
 
 FileUtils.mkdir('/var/run/mysqld')
 FileUtils.chown('mysql', 'mysql', '/var/run/mysqld')
