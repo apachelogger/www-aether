@@ -43,10 +43,13 @@ Dir.chdir('/var/www/media/includes') do
   File.write('db_auth.inc', data)
 end
 
-system('mysql < /tmp/init.sql') # Runs through shell for convenient redirecting.
+# Runs through shell for convenient redirecting.
+system('mysql < /tmp/init.sql') || raise
 
 FileUtils.mkdir('/var/run/mysqld')
 FileUtils.chown('mysql', 'mysql', '/var/run/mysqld')
 
 FileUtils.rm(Dir.glob('/etc/apache2/sites-enabled/*'))
 FileUtils.cp('/tmp/vhost.conf', '/etc/apache2/sites-enabled/www.kde.org.conf')
+
+system('deploy-aether.rb') || raise
